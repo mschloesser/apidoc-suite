@@ -5,14 +5,13 @@
  * Time: 4:53 PM
  * To change this template use File | Settings | File Templates.
  */
-package {
+package org.asforge.apidocs.desktop.view.component{
 
     import mx.collections.ArrayList;
     import mx.collections.IList;
     import mx.events.FlexEvent;
 
     import org.asforge.apidocs.desktop.model.ApiDoc;
-    import org.asforge.apidocs.desktop.view.component.DropDownListApiDocSelectionView;
     import org.flexunit.async.Async;
     import org.fluint.uiImpersonation.UIImpersonator;
     import org.hamcrest.assertThat;
@@ -44,16 +43,18 @@ package {
             selectRandomApiDoc();
         }
 
-        [Test(ui)]
+        [Test]
         public function selectionViewIsDisabledIfListIsEmpty():void {
             assertThat(_apiDocSelectionView.skin.currentState, equalTo("disabled"));
         }
 
-        [Ignore]
-        [Test(ui)]
+        [Test(async)]
         public function selectionViewIsEnabledIfListIsPopulated():void {
             populateDropDownList();
-            assertThat(_apiDocSelectionView.skin.currentState, equalTo("normal"));
+            var result:Function = function(event:FlexEvent, passThroughData:Object):void {
+                assertThat(_apiDocSelectionView.skin.currentState, equalTo("normal"));
+            };
+            Async.handleEvent(this, _apiDocSelectionView.skin, FlexEvent.STATE_CHANGE_COMPLETE, result);
         }
 
         private function selectRandomApiDoc():void { 

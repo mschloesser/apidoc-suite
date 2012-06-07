@@ -5,17 +5,18 @@
  * Time: 11:51 PM
  * To change this template use File | Settings | File Templates.
  */
-package {
+package org.asforge.apidocs.desktop.view.component{
 
     import flash.events.Event;
     import flash.events.MouseEvent;
 
-    import mx.collections.ArrayList;
+    import mx.collections.ArrayCollection;
     import mx.events.FlexEvent;
 
-    import org.asforge.apidocs.desktop.view.component.ApiDocItemListView;
     import org.flexunit.async.Async;
     import org.fluint.uiImpersonation.UIImpersonator;
+    import org.hamcrest.assertThat;
+    import org.hamcrest.object.equalTo;
     import org.osflash.signals.utils.proceedOnSignal;
 
     public class TestApiDocItemList {
@@ -43,6 +44,21 @@ package {
             performDoubleClick();
         }
 
+        [Test]
+        public function listViewIsDisabledIfEmpty():void {
+            assertThat(_apiDocItemListView.skin.currentState, equalTo("disabled"));
+        }
+
+        [Test(async)]
+        public function listViewIsEnabledIfNotEmpty():void {
+            populateApiDocItemList();
+
+            var result:Function = function(event:FlexEvent, passThroughData:Object):void {
+                assertThat(_apiDocItemListView.skin.currentState, equalTo("normal"));
+            };
+            Async.handleEvent(this, _apiDocItemListView.skin, FlexEvent.STATE_CHANGE_COMPLETE, result);
+        }
+
         private function selectRandomItem():void {
             _apiDocItemListView.list.selectedIndex = 0;
             _apiDocItemListView.list.dispatchEvent(new Event("valueCommit"));
@@ -53,7 +69,7 @@ package {
         }
 
         private function populateApiDocItemList():void {
-            _apiDocItemListView.apiDocItemList = new ArrayList([
+            _apiDocItemListView.apiDocItemList = new ArrayCollection([
                 1, 2, 3
             ]);
         }

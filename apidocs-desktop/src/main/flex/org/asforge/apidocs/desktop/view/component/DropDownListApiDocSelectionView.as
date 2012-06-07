@@ -9,26 +9,24 @@ package org.asforge.apidocs.desktop.view.component {
 
     import mx.collections.IList;
 
-    import org.asforge.apidocs.desktop.view.IApiDocSelector;
+    import org.asforge.apidocs.desktop.view.IApiDocSelectionView;
     import org.asforge.apidocs.desktop.view.component.skin.DropDownListApiDocSelectorSkin;
+    import org.osflash.signals.ISignal;
     import org.osflash.signals.natives.NativeSignal;
 
     import spark.components.DropDownList;
     import spark.components.SkinnableContainer;
     import spark.events.IndexChangeEvent;
 
-    [SkinState("normal")]
-    [SkinState("disabled")]
-
     public class DropDownListApiDocSelectionView extends SkinnableContainer
-            implements IApiDocSelector {
+            implements IApiDocSelectionView {
 
         [SkinPart(required=true)]
         public var dropDownList:DropDownList;
 
         private var _apiDocList:IList;
 
-        public var apiDocSelected:NativeSignal;
+        private var _apiDocSelected:ISignal;
 
         public function DropDownListApiDocSelectionView() {
             super();
@@ -39,7 +37,7 @@ package org.asforge.apidocs.desktop.view.component {
             super.partAdded(partName, instance);
 
             if (instance == dropDownList) {
-                apiDocSelected = new NativeSignal(dropDownList, IndexChangeEvent.CHANGE, IndexChangeEvent);
+                _apiDocSelected = new NativeSignal(dropDownList, IndexChangeEvent.CHANGE, IndexChangeEvent);
             }
         }
 
@@ -55,6 +53,10 @@ package org.asforge.apidocs.desktop.view.component {
         public function set apiDocList(value:IList):void {
             _apiDocList = value;
             invalidateSkinState();
+        }
+
+        public function get apiDocSelected():ISignal {
+            return _apiDocSelected;
         }
     }
 }

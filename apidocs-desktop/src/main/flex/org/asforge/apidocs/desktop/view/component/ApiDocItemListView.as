@@ -9,23 +9,27 @@ package org.asforge.apidocs.desktop.view.component {
 
     import flash.events.MouseEvent;
 
-    import mx.collections.ArrayList;
+    import mx.collections.ListCollectionView;
 
+    import org.asforge.apidocs.desktop.view.IApiDocItemListView;
     import org.asforge.apidocs.desktop.view.component.skin.ApiDocItemListSkin;
+    import org.osflash.signals.ISignal;
     import org.osflash.signals.natives.NativeSignal;
 
     import spark.components.List;
     import spark.components.SkinnableContainer;
 
-    public class ApiDocItemListView extends SkinnableContainer {
+    [SkinState("normal")]
+    [SkinState("disabled")]
+    
+    public class ApiDocItemListView extends SkinnableContainer implements IApiDocItemListView {
 
         [SkinPart(required=true)]
         public var list:List;
 
-        [Bindable]
-        public var apiDocItemList:ArrayList;
+        private var _apiDocItemList:ListCollectionView;
 
-        public var itemSelected:NativeSignal;
+        private var _itemSelected:ISignal;
 
         public function ApiDocItemListView() {
             super();
@@ -36,8 +40,26 @@ package org.asforge.apidocs.desktop.view.component {
             super.partAdded(partName, instance);
 
             if (instance == list) {
-                itemSelected = new NativeSignal(list, MouseEvent.DOUBLE_CLICK, MouseEvent);
+                _itemSelected = new NativeSignal(list, MouseEvent.DOUBLE_CLICK, MouseEvent);
             }
+        }
+
+        override protected function getCurrentSkinState():String {
+            return apiDocItemList !== null && apiDocItemList.length > 0 ? "normal" : "disabled";
+        }
+
+        [Bindable]
+        public function get apiDocItemList():ListCollectionView {
+            return _apiDocItemList;
+        }
+
+        public function set apiDocItemList(value:ListCollectionView):void {
+            _apiDocItemList = value;
+            invalidateSkinState();
+        }
+
+        public function get itemSelected():ISignal {
+            return _itemSelected;
         }
     }
 }

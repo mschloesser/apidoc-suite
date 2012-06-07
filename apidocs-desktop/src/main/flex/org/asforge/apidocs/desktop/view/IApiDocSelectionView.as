@@ -9,8 +9,12 @@ package org.asforge.apidocs.desktop.view {
 
     import mx.collections.IList;
 
-    public interface IApiDocSelector {
+    import org.osflash.signals.ISignal;
+
+    public interface IApiDocSelectionView {
         function get apiDocList():IList;
         function set apiDocList(value:IList):void;
+
+        function get apiDocSelected():ISignal
     }
 }
