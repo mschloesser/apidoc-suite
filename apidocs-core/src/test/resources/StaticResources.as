@@ -14,15 +14,15 @@ package {
         [Embed(source="/as3-doc.html", mimeType="application/octet-stream")]
         private static const staticAs3DocSource:Class;
 
-        [Embed(source="/simple.html", mimeType="application/octet-stream")]
-        private static const staticSimpleHtmlSource:Class;
+        [Embed(source="/apidocs.xml", mimeType="application/octet-stream")]
+        private static const staticApiDocsSource:Class;
 
         public static function getAs3DocSource():String {
             return getStringFromByteArray(staticAs3DocSource);
         }
 
-        public static function getSimpleHtmlSource():String {
-            return getStringFromByteArray(staticSimpleHtmlSource);
+        public static function getApiDocsSource():String {
+            return getStringFromByteArray(staticApiDocsSource);
         }
 
         private static function getStringFromByteArray(classRef:Class):String {

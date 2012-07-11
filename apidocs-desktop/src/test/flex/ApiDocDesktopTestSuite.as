@@ -9,6 +9,7 @@ package {
 
     import org.asforge.apidocs.desktop.view.component.TestApiDocItemList;
     import org.asforge.apidocs.desktop.view.component.TestApiDocSelectionView;
+    import org.asforge.apidocs.desktop.view.component.TestListFilterView;
 
     [Suite]
     [RunWith("org.flexunit.runners.Suite")]
@@ -16,6 +17,7 @@ package {
 
         public var testApiDocItemList:TestApiDocItemList;
         public var testApiDocSelectionView:TestApiDocSelectionView;
+        public var testListFilterView:TestListFilterView;
 
     }
 }

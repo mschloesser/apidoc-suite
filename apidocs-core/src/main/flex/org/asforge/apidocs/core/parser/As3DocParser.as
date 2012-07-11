@@ -10,8 +10,8 @@ package org.asforge.apidocs.core.parser {
     import mx.collections.ArrayList;
     import mx.collections.IList;
 
-    public class As3DocParser {
-        public function parse(source:String):IList {
+    public class As3DocParser implements IApiDocParser {
+        public function parseApiDoc(source:String):IList {
 
             var result:Array = [];
 
