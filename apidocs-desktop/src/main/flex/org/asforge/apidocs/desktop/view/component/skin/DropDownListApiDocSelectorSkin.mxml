@@ -12,6 +12,7 @@
 
     <s:DropDownList id="dropDownList" width="100%" height="100%"
                     dataProvider="{hostComponent.apiDocList}"
-                    enabled="{currentState == 'enabled'}"/>
+                    enabled="{hostComponent.apiDocList.length > 0}"
+                    labelField="title"/>
 
 </s:SparkSkin>

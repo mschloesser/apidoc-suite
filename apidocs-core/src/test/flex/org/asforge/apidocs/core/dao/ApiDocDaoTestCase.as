@@ -19,7 +19,7 @@ package org.asforge.apidocs.core.dao {
     public class ApiDocDaoTestCase {
 
         private var apiDoc:ApiDoc;
-        private var dao:ApiDocDao;
+        private var dao:IApiDocDao;
 
         [Before]
         public function setUp():void {
@@ -33,9 +33,11 @@ package org.asforge.apidocs.core.dao {
         public function tearDown():void {
             dao = null;
             apiDoc = null;
-            File.applicationStorageDirectory
-                .resolvePath("apidocs-integration-test.sqlite")
-                .deleteFile();
+            var dbFile:File = File.applicationStorageDirectory
+                .resolvePath("apidocs-integration-test.sqlite");
+            if (dbFile.exists) {
+                dbFile.deleteFile();
+            }
         }
 
         [Test]

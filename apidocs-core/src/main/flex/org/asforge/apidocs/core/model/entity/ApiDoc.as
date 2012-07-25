@@ -58,5 +58,9 @@ package org.asforge.apidocs.core.model.entity {
         public function set type(type:int):void {
             _type = type;
         }
+
+        public function isIdValid():Boolean {
+            return id > 0;
+        }
     }
 }

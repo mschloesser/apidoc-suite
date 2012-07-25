@@ -7,7 +7,7 @@
  */
 package org.asforge.apidocs.desktop.view.component {
 
-    import mx.collections.IList;
+    import mx.collections.ListCollectionView;
 
     import org.asforge.apidocs.desktop.view.IApiDocSelectionView;
     import org.asforge.apidocs.desktop.view.component.skin.DropDownListApiDocSelectorSkin;
@@ -24,7 +24,7 @@ package org.asforge.apidocs.desktop.view.component {
         [SkinPart(required=true)]
         public var dropDownList:DropDownList;
 
-        private var _apiDocList:IList;
+        private var _apiDocList:ListCollectionView;
 
         private var _apiDocSelected:ISignal;
 
@@ -46,11 +46,11 @@ package org.asforge.apidocs.desktop.view.component {
         }
 
         [Bindable]
-        public function get apiDocList():IList {
+        public function get apiDocList():ListCollectionView {
             return _apiDocList;
         }
 
-        public function set apiDocList(value:IList):void {
+        public function set apiDocList(value:ListCollectionView):void {
             _apiDocList = value;
             invalidateSkinState();
         }

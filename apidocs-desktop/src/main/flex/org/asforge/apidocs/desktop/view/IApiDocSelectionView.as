@@ -7,13 +7,13 @@
  */
 package org.asforge.apidocs.desktop.view {
 
-    import mx.collections.IList;
+    import mx.collections.ListCollectionView;
 
     import org.osflash.signals.ISignal;
 
     public interface IApiDocSelectionView {
-        function get apiDocList():IList;
-        function set apiDocList(value:IList):void;
+        function get apiDocList():ListCollectionView;
+        function set apiDocList(value:ListCollectionView):void;
 
         function get apiDocSelected():ISignal
     }

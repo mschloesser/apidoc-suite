@@ -7,14 +7,14 @@
  */
 package org.asforge.apidocs.core.dao {
 
-    import mx.collections.ICollectionView;
+    import mx.collections.ListCollectionView;
 
     import org.asforge.apidocs.core.model.entity.ApiDoc;
 
-    public interface ApiDocDao {
+    public interface IApiDocDao {
         function addApiDoc(apiDoc:ApiDoc):void;
         function deleteApiDoc(apiDoc:ApiDoc):void;
         function updateApiDoc(apiDoc:ApiDoc):void;
-        function findAll():ICollectionView;
+        function findAll():ListCollectionView;
     }
 }
