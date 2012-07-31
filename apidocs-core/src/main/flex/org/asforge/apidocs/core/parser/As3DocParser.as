@@ -10,7 +10,10 @@ package org.asforge.apidocs.core.parser {
     import mx.collections.ArrayList;
     import mx.collections.IList;
 
+    import org.asforge.apidocs.core.model.ApiDocItem;
+
     public class As3DocParser implements IApiDocParser {
+        public var apiDocItemExtractor:As3SourceItemExtractor;
         public function parseApiDoc(source:String):IList {
 
             var result:Array = [];
@@ -23,27 +26,11 @@ package org.asforge.apidocs.core.parser {
             var length:int = parts.length - 1;
             for (var i:int = 0; i < length; i++) {
                 var part:String = parts[i];
-                var a:Object = extractApiDocItem(part);
+                var a:ApiDocItem = apiDocItemExtractor.extractItem(part);
                 result.push(a);
             }
 
             return new ArrayList(result);
-        }
-
-        private function extractApiDocItem(part:String):Object {
-            var search:String = "title=\"";
-            var titlePos:int = part.indexOf(search);
-            var title:String = part.substring(titlePos + search.length);
-            search = "\"";
-            titlePos = title.indexOf(search);
-            title = title.substring(0, titlePos);
-
-            var a:Object = {
-                pakageName: title,
-                name: title.split(".")[title.split(".").length - 1],
-                typee: part.indexOf("<i>") > -1
-            };
-            return a;
         }
 
         private function extractTargetBody(source:String):String {

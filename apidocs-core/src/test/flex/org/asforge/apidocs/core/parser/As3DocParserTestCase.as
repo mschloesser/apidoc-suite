@@ -14,18 +14,24 @@ package org.asforge.apidocs.core.parser{
     import org.hamcrest.object.equalTo;
     import org.hamcrest.object.instanceOf;
 
-    public class TestAs3DocParser {
+    public class As3DocParserTestCase {
 
+        private var parser:As3DocParser;
+
+        [Before]
+        public function setUp():void {
+            parser = new As3DocParser();
+            parser.apiDocItemExtractor = new As3SourceItemExtractor();
+        }
+        
         [Test]
         public function returnsEmptyListIfEmptySource():void {
-            var parser:As3DocParser = new As3DocParser();
             assertThat(parser.parseApiDoc("").length, equalTo(0));
         }
 
         [Test]
-        public function parserExtactsListOfApiDocItemsFromValidSource():void {
+        public function parserExtractsListOfApiDocItemsFromValidSource():void {
             var source:String = StaticResources.getAs3DocSource();
-            var parser:As3DocParser = new As3DocParser();
             var result:IList = parser.parseApiDoc(source);
             assertThat(result.length, greaterThan(0));
             assertThat(result.getItemAt(0), instanceOf(Object));
