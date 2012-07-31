@@ -25,8 +25,9 @@ package org.asforge.apidocs.core.parser {
             titlePos = title.indexOf(search);
             title = title.substring(0, titlePos);
 
-            apiDocItem.name = title.split(".")[title.split(".").length - 1];
-            apiDocItem.packageName = title;
+            var splitTitle:Array = title.split(".");
+            apiDocItem.name = splitTitle[splitTitle.length - 1];
+            apiDocItem.packageName = title.substring(0, title.lastIndexOf("."));
             apiDocItem.type = ApiDocItemType.byOrdinal(definition.indexOf("<i>") > -1 ? 1 : 0);
 
             if (!apiDocItem.isValid()) {

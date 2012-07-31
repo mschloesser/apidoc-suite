@@ -26,13 +26,23 @@ package org.asforge.apidocs.core.parser {
         }
 
         [Test]
+        public function extractorProducesValidRootPackagedApiDocItem():void {
+
+            var extractor:As3SourceItemExtractor = new As3SourceItemExtractor();
+            var item:ApiDocItem = extractor.extractItem(htmlSourceForClassInRootPackage());
+
+            assertThat(item.name, equalTo("ArgumentError"));
+            assertThat(item.packageName, equalTo(""));
+        }
+
+        [Test]
         public function extractorProducesValidApiDocItemOfTypeClass():void {
 
             var extractor:As3SourceItemExtractor = new As3SourceItemExtractor();
             var item:ApiDocItem = extractor.extractItem(htmlSourceForClass());
             
             assertThat(item.name, equalTo("AAAARecord"));
-            assertThat(item.packageName, equalTo("flash.net.dns.AAAARecord"));
+            assertThat(item.packageName, equalTo("flash.net.dns"));
             assertThat(item.type, equalTo(ApiDocItemType.CLASS));
         }
 
@@ -42,7 +52,7 @@ package org.asforge.apidocs.core.parser {
             var item:ApiDocItem = extractor.extractItem(htmlSourceForInterface());
 
             assertThat(item.name, equalTo("IList"));
-            assertThat(item.packageName, equalTo("mx.collections.IList"));
+            assertThat(item.packageName, equalTo("mx.collections"));
             assertThat(item.type, equalTo(ApiDocItemType.INTERFACE));
         }
 
@@ -74,6 +84,10 @@ package org.asforge.apidocs.core.parser {
                     'languageversion="3.0">' +
                     '<i>IList</i><br>' +
                     '</a>';
+        }
+
+        private function htmlSourceForClassInRootPackage():String {
+            return '<a name="ftr" href="" target="_self" title="ArgumentError" onclick="svScrl(this);" oncontextmenu="svScrl(this);" runtime="Flash::9##AIR::1.0##Lite::4##" languageversion="3.0">ArgumentError<br></a>';
         }
     }
 }

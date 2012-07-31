@@ -15,7 +15,11 @@ package org.asforge.apidocs.core.model {
         public var type:ApiDocItemType;
 
         public function isValid():Boolean {
-            return name != "" && packageName != "" && type != null;
+            return name != "" && type != null;
+        }
+
+        public function get url():String {
+            return packageName.replace(/\./, '/') + ".html";
         }
     }
 }

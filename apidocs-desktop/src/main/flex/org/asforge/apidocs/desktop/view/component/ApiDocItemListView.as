@@ -11,6 +11,7 @@ package org.asforge.apidocs.desktop.view.component {
 
     import mx.collections.ListCollectionView;
 
+    import org.asforge.apidocs.core.model.ApiDocItem;
     import org.asforge.apidocs.desktop.view.IApiDocItemListView;
     import org.asforge.apidocs.desktop.view.component.skin.ApiDocItemListSkin;
     import org.osflash.signals.ISignal;
@@ -40,9 +41,8 @@ package org.asforge.apidocs.desktop.view.component {
             super.partAdded(partName, instance);
 
             if (instance == list) {
-//                _itemSelected = new NativeSignal(list, MouseEvent.DOUBLE_CLICK, MouseEvent);
                 list.addEventListener(MouseEvent.DOUBLE_CLICK, handleDoubleClick);
-                _itemSelected = new Signal(Object);
+                _itemSelected = new Signal(ApiDocItem);
             }
         }
 

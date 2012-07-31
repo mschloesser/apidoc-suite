@@ -13,6 +13,7 @@ package org.asforge.apidocs.desktop.view {
     import mx.collections.ListCollectionView;
     import mx.controls.Alert;
 
+    import org.asforge.apidocs.core.model.ApiDocItem;
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.core.service.IApiDocItemService;
     import org.asforge.apidocs.desktop.signal.ApiDocSelectedSignal;
@@ -43,7 +44,7 @@ package org.asforge.apidocs.desktop.view {
             itemService.queryItems(apiDoc);
         }
 
-        private function onItemSelected(item:Object):void {
+        private function onItemSelected(item:ApiDocItem):void {
             navigateToURL(new URLRequest(item.url));
         }
 

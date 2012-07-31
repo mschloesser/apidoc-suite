@@ -9,6 +9,7 @@ package org.asforge.apidocs.core.parser{
 
     import mx.collections.IList;
 
+    import org.asforge.apidocs.core.model.ApiDocItem;
     import org.hamcrest.assertThat;
     import org.hamcrest.number.greaterThan;
     import org.hamcrest.object.equalTo;
@@ -34,7 +35,7 @@ package org.asforge.apidocs.core.parser{
             var source:String = StaticResources.getAs3DocSource();
             var result:IList = parser.parseApiDoc(source);
             assertThat(result.length, greaterThan(0));
-            assertThat(result.getItemAt(0), instanceOf(Object));
+            assertThat(result.getItemAt(0), instanceOf(ApiDocItem));
         }
     }
 }
