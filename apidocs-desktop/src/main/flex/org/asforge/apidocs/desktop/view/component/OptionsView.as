@@ -16,6 +16,7 @@ package org.asforge.apidocs.desktop.view.component {
     import mx.validators.Validator;
 
     import org.asforge.apidocs.core.model.entity.ApiDoc;
+    import org.asforge.apidocs.desktop.view.IOptionsView;
     import org.asforge.apidocs.desktop.view.component.skin.OptionsViewSkin;
     import org.osflash.signals.ISignal;
     import org.osflash.signals.Signal;
@@ -25,7 +26,7 @@ package org.asforge.apidocs.desktop.view.component {
     import spark.components.SkinnableContainer;
     import spark.events.GridItemEditorEvent;
 
-    public class OptionsView extends SkinnableContainer {
+    public class OptionsView extends SkinnableContainer implements IOptionsView {
 
         [SkinPart]
         public var dataGrid:DataGrid;
@@ -63,6 +64,7 @@ package org.asforge.apidocs.desktop.view.component {
             } else if (instance === deleteApiDocButton) {
                 deleteApiDocButton.addEventListener(MouseEvent.CLICK, handleDeleteButtonClick);
             } else if (instance === dataGrid) {
+                dataGrid.addEventListener(GridItemEditorEvent.GRID_ITEM_EDITOR_SESSION_START, handleItemEditStart);
                 dataGrid.addEventListener(GridItemEditorEvent.GRID_ITEM_EDITOR_SESSION_SAVE, handleItemEditEnd);
                 dataGrid.addEventListener(GridItemEditorEvent.GRID_ITEM_EDITOR_SESSION_CANCEL, handleItemEditCancel);
 
@@ -70,27 +72,26 @@ package org.asforge.apidocs.desktop.view.component {
             }
         }
 
-        private function handleDeleteButtonClick(event:MouseEvent):void {
-            var apiDoc:ApiDoc = dataGrid.selectedItem as ApiDoc;
-            if (apiDoc.id > 0) {
-                _deleteButtonSignal.dispatch(apiDoc);
-            } else {
-                _apiDocList.removeItemAt(_apiDocList.getItemIndex(apiDoc));
-            }
-        }
-
         override protected function partRemoved(partName:String, instance:Object):void {
             super.partRemoved(partName, instance);
 
-            if (instance === _saveApiDocSignal) {
+            if (instance === addApiDocButton) {
                 addApiDocButton.removeEventListener(MouseEvent.CLICK, handleAddButtonClick);
                 _saveApiDocSignal.removeAll();
                 _saveApiDocSignal = null;
-            } else if (instance === _deleteButtonSignal) {
-                deleteApiDocButton.removeEventListener(MouseEvent.CLICK, handleAddButtonClick);
+            } else if (instance === deleteApiDocButton) {
+                dataGrid.removeEventListener(GridItemEditorEvent.GRID_ITEM_EDITOR_SESSION_START, handleItemEditStart);
+                dataGrid.removeEventListener(GridItemEditorEvent.GRID_ITEM_EDITOR_SESSION_SAVE, handleItemEditEnd);
+                dataGrid.removeEventListener(GridItemEditorEvent.GRID_ITEM_EDITOR_SESSION_CANCEL, handleItemEditCancel);
+
                 _deleteButtonSignal.removeAll();
                 _deleteButtonSignal = null;
             }
+        }
+
+        private function handleDeleteButtonClick(event:MouseEvent):void {
+            var apiDoc:ApiDoc = dataGrid.selectedItem as ApiDoc;
+            _deleteButtonSignal.dispatch(apiDoc);
         }
 
         private function initializeValidators():void {
@@ -120,8 +121,18 @@ package org.asforge.apidocs.desktop.view.component {
             }
         }
 
+        private function handleItemEditStart(event:GridItemEditorEvent):void {
+            addApiDocButton.enabled = false;
+            deleteApiDocButton.enabled = false;
+        }
+
         private function handleItemEditCancel(event:GridItemEditorEvent):void {
             _apiDocList.removeItemAt(_apiDocList.getItemIndex(dataGrid.selectedItem));
+
+            addApiDocButton.enabled = true;
+            if (dataGrid.selectedItem !== null) {
+                deleteApiDocButton.enabled = true;
+            }
         }
 
         private function handleAddButtonClick(event:MouseEvent):void {
@@ -138,6 +149,11 @@ package org.asforge.apidocs.desktop.view.component {
             var validationResult:Array = Validator.validateAll(_validators);
             if (validationResult.length == 0) {
                 _saveApiDocSignal.dispatch(dataGrid.selectedItem);
+            }
+
+            addApiDocButton.enabled = true;
+            if (dataGrid.selectedItem !== null) {
+                deleteApiDocButton.enabled = true;
             }
         }
 

@@ -39,8 +39,10 @@ package org.asforge.apidocs.desktop.model {
 
         public function deleteApiDoc(apiDoc:ApiDoc):void {
             var itemIndex:int = list.getItemIndex(apiDoc);
-            list.removeItemAt(itemIndex)
-            apiDocService.deleteApiDoc(apiDoc);
+            list.removeItemAt(itemIndex);
+            if (apiDoc.id > 0) {
+                apiDocService.deleteApiDoc(apiDoc);
+            }
         }
 
     }

@@ -22,8 +22,12 @@ package org.asforge.apidocs.core.model.enumeration {
             _ordinal = ordinalCounter++;
         }
 
-        public function ordinal():int {
+        public function get ordinal():int {
             return _ordinal;
+        }
+
+        public function get name():String {
+            return _name;
         }
 
         public static function byOrdinal(type:int):ApiDocType {
@@ -40,6 +44,10 @@ package org.asforge.apidocs.core.model.enumeration {
             }
 
             return null;
+        }
+
+        public static function values():Array {
+            return [ AS3, JAVA, HAXE ];
         }
     }
 }

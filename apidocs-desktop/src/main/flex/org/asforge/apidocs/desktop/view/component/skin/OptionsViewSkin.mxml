@@ -15,21 +15,18 @@
         <s:VerticalLayout/>
     </s:layout>
 
-    <s:DataGrid id="dataGrid"
-                width="100%" height="100%" editable="true"
-                enabled="{currentState=='normal'}"
-                doubleClickEnabled="true">
+    <s:DataGrid id="dataGrid" width="100%" height="100%" editable="true">
         <s:columns>
             <s:ArrayList>
                 <s:GridColumn dataField="title" editable="true"  />
                 <s:GridColumn dataField="url" editable="true" />
-                <s:GridColumn dataField="type" editable="true" />
+                <s:GridColumn dataField="type" editable="true"/>
             </s:ArrayList>
         </s:columns>
     </s:DataGrid>
 
     <s:HGroup width="100%" textAlign="right">
-        <s:Button id="deleteApiDocButton" label="-" enabled="{dataGrid.selectedItem != null}"/>
+        <s:Button id="deleteApiDocButton" label="-"/>
         <s:Button id="addApiDocButton" label="+"/>
     </s:HGroup>
     

@@ -14,7 +14,7 @@ package org.asforge.apidocs.desktop.view.component {
     import org.asforge.apidocs.desktop.view.IApiDocItemListView;
     import org.asforge.apidocs.desktop.view.component.skin.ApiDocItemListSkin;
     import org.osflash.signals.ISignal;
-    import org.osflash.signals.natives.NativeSignal;
+    import org.osflash.signals.Signal;
 
     import spark.components.List;
     import spark.components.SkinnableContainer;
@@ -40,8 +40,14 @@ package org.asforge.apidocs.desktop.view.component {
             super.partAdded(partName, instance);
 
             if (instance == list) {
-                _itemSelected = new NativeSignal(list, MouseEvent.DOUBLE_CLICK, MouseEvent);
+//                _itemSelected = new NativeSignal(list, MouseEvent.DOUBLE_CLICK, MouseEvent);
+                list.addEventListener(MouseEvent.DOUBLE_CLICK, handleDoubleClick);
+                _itemSelected = new Signal(Object);
             }
+        }
+
+        private function handleDoubleClick(event:MouseEvent):void {
+            _itemSelected.dispatch(list.selectedItem);
         }
 
         override protected function getCurrentSkinState():String {

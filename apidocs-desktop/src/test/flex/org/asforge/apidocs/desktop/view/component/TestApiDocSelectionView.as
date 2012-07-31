@@ -7,11 +7,11 @@
  */
 package org.asforge.apidocs.desktop.view.component{
 
-    import mx.collections.ArrayList;
-    import mx.collections.IList;
+    import mx.collections.ArrayCollection;
+    import mx.collections.ListCollectionView;
     import mx.events.FlexEvent;
 
-    import org.asforge.apidocs.desktop.model.ApiDoc;
+    import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.flexunit.async.Async;
     import org.fluint.uiImpersonation.UIImpersonator;
     import org.hamcrest.assertThat;
@@ -66,7 +66,7 @@ package org.asforge.apidocs.desktop.view.component{
         }
 
         private function populateDropDownList():void {
-            var apiDocList:IList = new ArrayList();
+            var apiDocList:ListCollectionView = new ArrayCollection();
             apiDocList.addItem(new ApiDoc());
             apiDocList.addItem(new ApiDoc());
             apiDocList.addItem(new ApiDoc());

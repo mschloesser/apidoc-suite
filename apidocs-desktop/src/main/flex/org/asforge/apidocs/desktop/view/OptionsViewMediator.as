@@ -10,13 +10,12 @@ package org.asforge.apidocs.desktop.view {
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.core.service.IApiDocService;
     import org.asforge.apidocs.desktop.model.OptionsModel;
-    import org.asforge.apidocs.desktop.view.component.OptionsView;
     import org.robotlegs.mvcs.Mediator;
 
     public class OptionsViewMediator extends Mediator {
 
         [Inject]
-        public var view:OptionsView;
+        public var view:IOptionsView;
 
         [Inject]
         public var apiDocService:IApiDocService;

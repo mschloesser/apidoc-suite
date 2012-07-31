@@ -9,10 +9,11 @@ package org.asforge.apidocs.desktop.view.component {
 
     import mx.collections.ListCollectionView;
 
+    import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.desktop.view.IApiDocSelectionView;
     import org.asforge.apidocs.desktop.view.component.skin.DropDownListApiDocSelectorSkin;
     import org.osflash.signals.ISignal;
-    import org.osflash.signals.natives.NativeSignal;
+    import org.osflash.signals.Signal;
 
     import spark.components.DropDownList;
     import spark.components.SkinnableContainer;
@@ -37,8 +38,13 @@ package org.asforge.apidocs.desktop.view.component {
             super.partAdded(partName, instance);
 
             if (instance == dropDownList) {
-                _apiDocSelected = new NativeSignal(dropDownList, IndexChangeEvent.CHANGE, IndexChangeEvent);
+                dropDownList.addEventListener(IndexChangeEvent.CHANGE, handleIndexChangeEvent);
+                _apiDocSelected = new Signal(ApiDoc);
             }
+        }
+
+        private function handleIndexChangeEvent(event:IndexChangeEvent):void {
+            _apiDocSelected.dispatch(dropDownList.selectedItem);
         }
 
         override protected function getCurrentSkinState():String {

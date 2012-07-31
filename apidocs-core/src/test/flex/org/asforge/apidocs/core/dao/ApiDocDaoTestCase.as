@@ -67,7 +67,7 @@ package org.asforge.apidocs.core.dao {
             var apiDoc:ApiDoc = new ApiDoc();
             apiDoc.title = "Test API Doc";
             apiDoc.url = "http://www.apidoc-test.com/all-classes.html";
-            apiDoc.type = ApiDocType.AS3.ordinal();
+            apiDoc.type = ApiDocType.AS3.ordinal;
             return apiDoc;
         }
     }
