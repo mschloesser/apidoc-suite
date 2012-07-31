@@ -16,29 +16,37 @@ package org.asforge.apidocs.core.parser {
 
     public class As3SourceExtractorTestCase {
 
+        private var extractor:As3SourceItemExtractor;
+
+        [Before]
+        public function setUp():void {
+            extractor = new As3SourceItemExtractor();
+        }
+
+        [After]
+        public function tearDown():void {
+            extractor = null;
+        }
+
         [Test]
         public function nonMatchingDefinitionThrowsException():void {
             try {
-                var extractor:As3SourceItemExtractor = new As3SourceItemExtractor();
                 extractor.extractItem("");
                 fail("ItemExtractorDefinition should have been thrown");
             } catch (e:ItemExtractorException) {}
         }
 
         [Test]
-        public function extractorProducesValidRootPackagedApiDocItem():void {
-
-            var extractor:As3SourceItemExtractor = new As3SourceItemExtractor();
+        public function extractorProducesValidRootPackagedApiDocItem():void
+        {
             var item:ApiDocItem = extractor.extractItem(htmlSourceForClassInRootPackage());
-
             assertThat(item.name, equalTo("ArgumentError"));
             assertThat(item.packageName, equalTo(""));
         }
 
         [Test]
-        public function extractorProducesValidApiDocItemOfTypeClass():void {
-
-            var extractor:As3SourceItemExtractor = new As3SourceItemExtractor();
+        public function extractorProducesValidApiDocItemOfTypeClass():void
+        {
             var item:ApiDocItem = extractor.extractItem(htmlSourceForClass());
             
             assertThat(item.name, equalTo("AAAARecord"));
@@ -47,8 +55,8 @@ package org.asforge.apidocs.core.parser {
         }
 
         [Test]
-        public function extractorProcucesValidApiDocItemOfTypeInterface():void {
-            var extractor:As3SourceItemExtractor = new As3SourceItemExtractor();
+        public function extractorProcucesValidApiDocItemOfTypeInterface():void
+        {
             var item:ApiDocItem = extractor.extractItem(htmlSourceForInterface());
 
             assertThat(item.name, equalTo("IList"));
