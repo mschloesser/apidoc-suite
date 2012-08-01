@@ -9,6 +9,7 @@ package org.asforge.apidocs.core.model {
 
     import org.asforge.apidocs.core.model.enumeration.ApiDocItemType;
 
+    [Bindable]
     public class ApiDocItem {
         public var name:String;
         public var packageName:String;
@@ -19,7 +20,7 @@ package org.asforge.apidocs.core.model {
         }
 
         public function get url():String {
-            return packageName.replace(/\./, '/') + ".html";
+            return packageName.replace(/\./g, '/') + "/" + name + ".html";
         }
     }
 }

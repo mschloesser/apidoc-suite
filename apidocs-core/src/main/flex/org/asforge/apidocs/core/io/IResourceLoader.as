@@ -11,6 +11,7 @@ package org.asforge.apidocs.core.io {
 
     public interface IResourceLoader extends IEventDispatcher {
 
+        function get sourceUrl():String;
         function set sourceUrl(sourceUrl:String):void;
 
         function load():void;

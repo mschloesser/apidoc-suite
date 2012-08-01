@@ -13,7 +13,7 @@ package org.asforge.apidocs.desktop.view.component {
 
     import org.asforge.apidocs.desktop.view.component.skin.ListFilterSkin;
     import org.osflash.signals.ISignal;
-    import org.osflash.signals.natives.NativeSignal;
+    import org.osflash.signals.Signal;
 
     import spark.components.CheckBox;
     import spark.components.SkinnableContainer;
@@ -53,12 +53,17 @@ package org.asforge.apidocs.desktop.view.component {
             super.partAdded(partName, instance);
 
             if (instance == textInput) {
-                filterChanged = new NativeSignal(textInput, TextOperationEvent.CHANGE, TextOperationEvent);
+                textInput.addEventListener(TextOperationEvent.CHANGE, handleTextOperationChange);
+                filterChanged = new Signal();
             }
 
             if (instance == toggleOptions) {
                 toggleOptions.addEventListener(MouseEvent.CLICK, handleToggleButtonClick);
             }
+        }
+
+        private function handleTextOperationChange(event:TextOperationEvent):void {
+            filterChanged.dispatch();
         }
 
         override protected function partRemoved(partName:String, instance:Object):void {

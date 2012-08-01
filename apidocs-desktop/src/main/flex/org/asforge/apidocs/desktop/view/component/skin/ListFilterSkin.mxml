@@ -18,7 +18,8 @@
             <s:ToggleButton id="toggleOptions" label="Options"/>
         </s:HGroup>
         <s:CheckBox id="regExpSwitch" label="Enable Regular Expressions"
-                includeIn="options"/>
+                includeIn="options"
+                itemCreationPolicy="immediate"/>
     </s:VGroup>
 </s:SparkSkin>
 

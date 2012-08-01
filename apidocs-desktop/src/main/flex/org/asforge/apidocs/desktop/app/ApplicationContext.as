@@ -16,23 +16,27 @@ package org.asforge.apidocs.desktop.app {
     import org.asforge.apidocs.core.dao.IApiDocDao;
     import org.asforge.apidocs.core.dao.impl.SqlLiteApiDaoImpl;
     import org.asforge.apidocs.core.parser.As3DocParser;
+    import org.asforge.apidocs.core.parser.As3SourceItemExtractor;
     import org.asforge.apidocs.core.parser.IApiDocParser;
     import org.asforge.apidocs.core.service.ApiDocItemService;
     import org.asforge.apidocs.core.service.ApiDocServiceImpl;
     import org.asforge.apidocs.core.service.IApiDocItemService;
     import org.asforge.apidocs.core.service.IApiDocService;
     import org.asforge.apidocs.core.util.ItemCache;
+    import org.asforge.apidocs.desktop.model.ApiDocItemModel;
     import org.asforge.apidocs.desktop.model.ApiDocModel;
     import org.asforge.apidocs.desktop.model.OptionsModel;
     import org.asforge.apidocs.desktop.signal.ApiDocSelectedSignal;
     import org.asforge.apidocs.desktop.view.ApiDocItemListViewMediator;
     import org.asforge.apidocs.desktop.view.ApiDocSelectionViewMediator;
+    import org.asforge.apidocs.desktop.view.FilterViewMediator;
     import org.asforge.apidocs.desktop.view.IApiDocItemListView;
     import org.asforge.apidocs.desktop.view.IApiDocSelectionView;
     import org.asforge.apidocs.desktop.view.IOptionsView;
     import org.asforge.apidocs.desktop.view.OptionsViewMediator;
     import org.asforge.apidocs.desktop.view.component.ApiDocItemListView;
     import org.asforge.apidocs.desktop.view.component.DropDownListApiDocSelectionView;
+    import org.asforge.apidocs.desktop.view.component.ListFilterView;
     import org.asforge.apidocs.desktop.view.component.OptionsView;
     import org.osflash.signals.ISignal;
     import org.osflash.signals.Signal;
@@ -54,18 +58,24 @@ package org.asforge.apidocs.desktop.app {
 
             var successSignal:ISignal = new Signal(ListCollectionView);
             var errorSignal:ISignal = new Signal();
+
             var itemService:ApiDocItemService = new ApiDocItemService(successSignal, errorSignal);
             itemService.itemCache = new ItemCache();
             itemService.itemCache.storage = new Dictionary();
             itemService.loader = new URLLoader();
-            itemService.parser = new As3DocParser();
+
+            var as3DocParser:As3DocParser = new As3DocParser();
+            as3DocParser.apiDocItemExtractor = new As3SourceItemExtractor();
+            itemService.parser = as3DocParser;
             injector.mapValue(IApiDocItemService, itemService);
 
             injector.mapSingleton(ApiDocModel);
+            injector.mapSingleton(ApiDocItemModel);
             injector.mapSingleton(OptionsModel);
 
             mediatorMap.mapView(DropDownListApiDocSelectionView, ApiDocSelectionViewMediator, IApiDocSelectionView);
             mediatorMap.mapView(ApiDocItemListView, ApiDocItemListViewMediator, IApiDocItemListView);
+            mediatorMap.mapView(ListFilterView, FilterViewMediator);
             mediatorMap.mapView(OptionsView, OptionsViewMediator, IOptionsView);
 
             super.startup();

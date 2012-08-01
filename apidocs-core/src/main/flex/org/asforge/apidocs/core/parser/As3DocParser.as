@@ -13,7 +13,9 @@ package org.asforge.apidocs.core.parser {
     import org.asforge.apidocs.core.model.ApiDocItem;
 
     public class As3DocParser implements IApiDocParser {
+
         public var apiDocItemExtractor:As3SourceItemExtractor;
+
         public function parseApiDoc(source:String):IList {
 
             var result:Array = [];
