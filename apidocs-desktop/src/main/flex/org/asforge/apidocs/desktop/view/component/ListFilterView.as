@@ -62,7 +62,7 @@ package org.asforge.apidocs.desktop.view.component {
             }
         }
 
-        private function handleTextOperationChange(event:TextOperationEvent):void {
+        private function handleTextOperationChange(event:TextOperationEvent = null):void {
             filterChanged.dispatch();
         }
 
@@ -80,6 +80,16 @@ package org.asforge.apidocs.desktop.view.component {
 
         private function handleToggleButtonClick(event:MouseEvent):void {
             currentState = toggleOptions.selected ? "options" : "normal";
+            invalidateSkinState();
+        }
+
+        public function resetFilter():void {
+            textInput.text = "";
+            handleTextOperationChange();
+        }
+
+        public function set state(state:String):void {
+            currentState = state;
             invalidateSkinState();
         }
     }

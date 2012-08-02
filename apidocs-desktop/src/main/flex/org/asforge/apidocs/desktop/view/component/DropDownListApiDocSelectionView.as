@@ -8,6 +8,7 @@
 package org.asforge.apidocs.desktop.view.component {
 
     import mx.collections.ListCollectionView;
+    import mx.states.State;
 
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.desktop.view.IApiDocSelectionView;
@@ -32,6 +33,11 @@ package org.asforge.apidocs.desktop.view.component {
         public function DropDownListApiDocSelectionView() {
             super();
             setStyle("skinClass", DropDownListApiDocSelectorSkin);
+
+            states = [
+                new State({name: "normal"}),
+                new State({name: "disabled"})
+            ];
         }
 
         override protected function partAdded(partName:String, instance:Object):void {
@@ -48,7 +54,7 @@ package org.asforge.apidocs.desktop.view.component {
         }
 
         override protected function getCurrentSkinState():String {
-            return apiDocList !== null && apiDocList.length > 0 ? "normal" : "disabled";
+            return currentState;
         }
 
         [Bindable]
@@ -63,6 +69,11 @@ package org.asforge.apidocs.desktop.view.component {
 
         public function get apiDocSelected():ISignal {
             return _apiDocSelected;
+        }
+
+        public function set state(state:String):void {
+            currentState = state;
+            invalidateSkinState();
         }
     }
 }

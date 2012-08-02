@@ -12,8 +12,8 @@
         <s:State name="options"/>
     </s:states>
 
-    <s:VGroup width="100%">
-        <s:HGroup width="100%" enabled="{currentState != 'disabled'}">
+    <s:VGroup width="100%" enabled="{currentState != 'disabled'}">
+        <s:HGroup width="100%">
             <s:TextInput id="textInput" width="100%"/>
             <s:ToggleButton id="toggleOptions" label="Options"/>
         </s:HGroup>

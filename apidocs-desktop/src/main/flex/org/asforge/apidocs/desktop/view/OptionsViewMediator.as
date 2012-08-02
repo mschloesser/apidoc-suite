@@ -23,9 +23,6 @@ package org.asforge.apidocs.desktop.view {
         [Inject]
         public var model:OptionsModel;
 
-        public function OptionsViewMediator() {
-        }
-
         override public function onRegister():void {
             super.onRegister();
             view.saveApiDocSignal.add(saveApiDoc);

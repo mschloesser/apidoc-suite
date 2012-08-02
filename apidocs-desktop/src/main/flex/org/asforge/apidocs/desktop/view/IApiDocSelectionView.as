@@ -16,5 +16,7 @@ package org.asforge.apidocs.desktop.view {
         function set apiDocList(value:ListCollectionView):void;
 
         function get apiDocSelected():ISignal
+
+        function set state(state:String):void;
     }
 }

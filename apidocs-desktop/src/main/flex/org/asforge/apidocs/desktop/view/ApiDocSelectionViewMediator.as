@@ -7,7 +7,10 @@
  */
 package org.asforge.apidocs.desktop.view {
 
+    import mx.collections.ListCollectionView;
+
     import org.asforge.apidocs.core.model.entity.ApiDoc;
+    import org.asforge.apidocs.desktop.model.ApiDocItemModel;
     import org.asforge.apidocs.desktop.model.ApiDocModel;
     import org.asforge.apidocs.desktop.signal.ApiDocSelectedSignal;
     import org.robotlegs.mvcs.Mediator;
@@ -23,12 +26,23 @@ package org.asforge.apidocs.desktop.view {
         [Inject]
         public var apiDocSelectedSignal:ApiDocSelectedSignal;
 
+        [Inject]
+        public var itemModel:ApiDocItemModel;
+
         override public function onRegister():void {
             view.apiDocList = model.findAll();
             view.apiDocSelected.add(onApiDocSelected);
+
+            itemModel.itemService.itemsFound.add(onItemsFound);
+            itemModel.itemService.errorOccurred.add(onItemsFound);
+        }
+
+        private function onItemsFound(list:ListCollectionView = null):void {
+            view.state = "normal";
         }
 
         private function onApiDocSelected(apiDoc:ApiDoc):void {
+            view.state = "disabled";
             apiDocSelectedSignal.dispatch(apiDoc);
         }
     }

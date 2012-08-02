@@ -65,7 +65,7 @@ package org.asforge.apidocs.desktop.model {
         public function applyFilter(text:String, regExpEnabled:Boolean):void {
             _filterText = text;
             _regExpEnabled = regExpEnabled;
-            itemList.refresh();
+            if (itemList != null) itemList.refresh();
         }
     }
 }

@@ -22,7 +22,8 @@ package org.asforge.apidocs.desktop.view.component {
 
     [SkinState("normal")]
     [SkinState("disabled")]
-    
+    [SkinState("loading")]
+
     public class ApiDocItemListView extends SkinnableContainer implements IApiDocItemListView {
 
         [SkinPart(required=true)]
@@ -31,6 +32,7 @@ package org.asforge.apidocs.desktop.view.component {
         private var _apiDocItemList:ListCollectionView;
 
         private var _itemSelected:ISignal;
+        private var _state:String = "normal";
 
         public function ApiDocItemListView() {
             super();
@@ -51,7 +53,7 @@ package org.asforge.apidocs.desktop.view.component {
         }
 
         override protected function getCurrentSkinState():String {
-            return apiDocItemList !== null && apiDocItemList.length > 0 ? "normal" : "disabled";
+            return _state;
         }
 
         [Bindable]
@@ -61,11 +63,17 @@ package org.asforge.apidocs.desktop.view.component {
 
         public function set apiDocItemList(value:ListCollectionView):void {
             _apiDocItemList = value;
+            _state = "normal";
             invalidateSkinState();
         }
 
         public function get itemSelected():ISignal {
             return _itemSelected;
+        }
+
+        public function set state(state:String):void {
+            _state = state;
+            invalidateSkinState();
         }
     }
 }

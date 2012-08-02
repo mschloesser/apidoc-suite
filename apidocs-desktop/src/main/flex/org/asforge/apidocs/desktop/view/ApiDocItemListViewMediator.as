@@ -11,7 +11,9 @@ package org.asforge.apidocs.desktop.view {
     import mx.controls.Alert;
 
     import org.asforge.apidocs.core.model.ApiDocItem;
+    import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.desktop.model.ApiDocItemModel;
+    import org.asforge.apidocs.desktop.signal.ApiDocSelectedSignal;
     import org.robotlegs.mvcs.Mediator;
 
     public class ApiDocItemListViewMediator extends Mediator {
@@ -22,12 +24,21 @@ package org.asforge.apidocs.desktop.view {
         [Inject]
         public var model:ApiDocItemModel;
 
+        [Inject]
+        public var apiDocSelectedSignal:ApiDocSelectedSignal;
+
         override public function onRegister():void {
             super.onRegister();
 
             model.itemService.itemsFound.add(onItemsFound);
             model.itemService.errorOccurred.add(onErrorOccurred);
             view.itemSelected.add(onItemSelected);
+
+            apiDocSelectedSignal.add(onApiDocSelected);
+        }
+
+        private function onApiDocSelected(apiDoc:ApiDoc):void {
+            view.state = "loading";
         }
 
         private function onErrorOccurred():void {
