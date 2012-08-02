@@ -17,12 +17,19 @@ package {
         [Embed(source="/apidocs.xml", mimeType="application/octet-stream")]
         private static const staticApiDocsSource:Class;
 
+        [Embed(source="/javadoc-test.html", mimeType="application/octet-stream")]
+        private static const staticJavadocSource:Class;
+
         public static function getAs3DocSource():String {
             return getStringFromByteArray(staticAs3DocSource);
         }
 
         public static function getApiDocsSource():String {
             return getStringFromByteArray(staticApiDocsSource);
+        }
+
+        public static function getJavaDocSource():String {
+            return getStringFromByteArray(staticJavadocSource);
         }
 
         private static function getStringFromByteArray(classRef:Class):String {
