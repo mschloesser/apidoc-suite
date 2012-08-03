@@ -12,19 +12,19 @@ package org.asforge.apidocs.desktop.view {
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.desktop.model.ApiDocItemModel;
     import org.asforge.apidocs.desktop.model.ApiDocModel;
-    import org.asforge.apidocs.desktop.signal.ApiDocSelectedSignal;
+    import org.asforge.apidocs.desktop.signal.DocSelectedSignal;
     import org.robotlegs.mvcs.Mediator;
 
-    public class ApiDocSelectionViewMediator extends Mediator {
+    public class DocSelectionViewMediator extends Mediator {
 
         [Inject]
-        public var view:IApiDocSelectionView;
+        public var view:IDocSelectionView;
 
         [Inject]
         public var model:ApiDocModel;
 
         [Inject]
-        public var apiDocSelectedSignal:ApiDocSelectedSignal;
+        public var apiDocSelectedSignal:DocSelectedSignal;
 
         [Inject]
         public var itemModel:ApiDocItemModel;

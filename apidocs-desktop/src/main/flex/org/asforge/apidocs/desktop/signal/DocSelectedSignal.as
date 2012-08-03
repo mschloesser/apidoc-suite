@@ -10,9 +10,9 @@ package org.asforge.apidocs.desktop.signal {
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.osflash.signals.Signal;
 
-    public class ApiDocSelectedSignal extends Signal {
+    public class DocSelectedSignal extends Signal {
 
-        public function ApiDocSelectedSignal() {
+        public function DocSelectedSignal() {
             super(ApiDoc);
         }
     }

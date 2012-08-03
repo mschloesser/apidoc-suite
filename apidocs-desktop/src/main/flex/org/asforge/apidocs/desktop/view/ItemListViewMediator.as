@@ -13,19 +13,19 @@ package org.asforge.apidocs.desktop.view {
     import org.asforge.apidocs.core.model.ApiDocItem;
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.desktop.model.ApiDocItemModel;
-    import org.asforge.apidocs.desktop.signal.ApiDocSelectedSignal;
+    import org.asforge.apidocs.desktop.signal.DocSelectedSignal;
     import org.robotlegs.mvcs.Mediator;
 
-    public class ApiDocItemListViewMediator extends Mediator {
+    public class ItemListViewMediator extends Mediator {
 
         [Inject]
-        public var view:IApiDocItemListView;
+        public var view:IItemListView;
 
         [Inject]
         public var model:ApiDocItemModel;
 
         [Inject]
-        public var apiDocSelectedSignal:ApiDocSelectedSignal;
+        public var apiDocSelectedSignal:DocSelectedSignal;
 
         override public function onRegister():void {
             super.onRegister();

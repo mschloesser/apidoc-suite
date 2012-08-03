@@ -11,7 +11,7 @@ package org.asforge.apidocs.desktop.view {
 
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.desktop.model.ApiDocItemModel;
-    import org.asforge.apidocs.desktop.signal.ApiDocSelectedSignal;
+    import org.asforge.apidocs.desktop.signal.DocSelectedSignal;
     import org.asforge.apidocs.desktop.view.component.ListFilterView;
     import org.robotlegs.mvcs.Mediator;
 
@@ -24,7 +24,7 @@ package org.asforge.apidocs.desktop.view {
         public var itemModel:ApiDocItemModel;
 
         [Inject]
-        public var apiDocSelectedSignal:ApiDocSelectedSignal;
+        public var apiDocSelectedSignal:DocSelectedSignal;
 
         override public function onRegister():void {
             super.onRegister();

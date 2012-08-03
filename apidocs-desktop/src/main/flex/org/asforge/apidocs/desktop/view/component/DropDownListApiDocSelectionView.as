@@ -11,7 +11,7 @@ package org.asforge.apidocs.desktop.view.component {
     import mx.states.State;
 
     import org.asforge.apidocs.core.model.entity.ApiDoc;
-    import org.asforge.apidocs.desktop.view.IApiDocSelectionView;
+    import org.asforge.apidocs.desktop.view.IDocSelectionView;
     import org.asforge.apidocs.desktop.view.component.skin.DropDownListApiDocSelectorSkin;
     import org.osflash.signals.ISignal;
     import org.osflash.signals.Signal;
@@ -21,7 +21,7 @@ package org.asforge.apidocs.desktop.view.component {
     import spark.events.IndexChangeEvent;
 
     public class DropDownListApiDocSelectionView extends SkinnableContainer
-            implements IApiDocSelectionView {
+            implements IDocSelectionView {
 
         [SkinPart(required=true)]
         public var dropDownList:DropDownList;

@@ -1,8 +1,8 @@
 /**
  * Created by IntelliJ IDEA.
  * User: micha
- * Date: 6/7/12
- * Time: 11:38 AM
+ * Date: 6/3/12
+ * Time: 5:28 PM
  * To change this template use File | Settings | File Templates.
  */
 package org.asforge.apidocs.desktop.view {
@@ -11,11 +11,11 @@ package org.asforge.apidocs.desktop.view {
 
     import org.osflash.signals.ISignal;
 
-    public interface IApiDocItemListView {
-        function get apiDocItemList():ListCollectionView;
-        function set apiDocItemList(value:ListCollectionView):void;
+    public interface IDocSelectionView {
+        function get apiDocList():ListCollectionView;
+        function set apiDocList(value:ListCollectionView):void;
 
-        function get itemSelected():ISignal;
+        function get apiDocSelected():ISignal
 
         function set state(state:String):void;
     }

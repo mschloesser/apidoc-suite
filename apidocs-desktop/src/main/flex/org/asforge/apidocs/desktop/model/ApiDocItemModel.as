@@ -15,7 +15,7 @@ package org.asforge.apidocs.desktop.model {
     import org.asforge.apidocs.core.model.ApiDocItem;
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.core.service.IApiDocItemService;
-    import org.asforge.apidocs.desktop.signal.ApiDocSelectedSignal;
+    import org.asforge.apidocs.desktop.signal.DocSelectedSignal;
     import org.robotlegs.mvcs.Actor;
 
     public class ApiDocItemModel extends Actor {
@@ -24,14 +24,14 @@ package org.asforge.apidocs.desktop.model {
         public var itemService:IApiDocItemService;
 
         [Inject]
-        public var apiDocSelectedSignal:ApiDocSelectedSignal;
+        public var apiDocSelectedSignal:DocSelectedSignal;
 
         private var _selectedApiDoc:ApiDoc;
         private var itemList:ListCollectionView;
         private var _filterText:String;
         private var _regExpEnabled:Boolean;
 
-        public function ApiDocItemModel(apiDocSelectedSignal:ApiDocSelectedSignal) {
+        public function ApiDocItemModel(apiDocSelectedSignal:DocSelectedSignal) {
             this.apiDocSelectedSignal = apiDocSelectedSignal;
             this.apiDocSelectedSignal.add(onApiDocSelected);
         }

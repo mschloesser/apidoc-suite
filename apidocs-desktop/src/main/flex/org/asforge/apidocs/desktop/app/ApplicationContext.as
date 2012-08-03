@@ -26,16 +26,16 @@ package org.asforge.apidocs.desktop.app {
     import org.asforge.apidocs.desktop.model.ApiDocItemModel;
     import org.asforge.apidocs.desktop.model.ApiDocModel;
     import org.asforge.apidocs.desktop.model.OptionsModel;
-    import org.asforge.apidocs.desktop.signal.ApiDocSelectedSignal;
-    import org.asforge.apidocs.desktop.view.ApiDocItemListViewMediator;
-    import org.asforge.apidocs.desktop.view.ApiDocSelectionViewMediator;
+    import org.asforge.apidocs.desktop.signal.DocSelectedSignal;
+    import org.asforge.apidocs.desktop.view.DocSelectionViewMediator;
     import org.asforge.apidocs.desktop.view.FilterViewMediator;
-    import org.asforge.apidocs.desktop.view.IApiDocItemListView;
-    import org.asforge.apidocs.desktop.view.IApiDocSelectionView;
+    import org.asforge.apidocs.desktop.view.IDocSelectionView;
+    import org.asforge.apidocs.desktop.view.IItemListView;
     import org.asforge.apidocs.desktop.view.IOptionsView;
+    import org.asforge.apidocs.desktop.view.ItemListViewMediator;
     import org.asforge.apidocs.desktop.view.OptionsViewMediator;
-    import org.asforge.apidocs.desktop.view.component.ApiDocItemListView;
     import org.asforge.apidocs.desktop.view.component.DropDownListApiDocSelectionView;
+    import org.asforge.apidocs.desktop.view.component.ItemListView;
     import org.asforge.apidocs.desktop.view.component.ListFilterView;
     import org.asforge.apidocs.desktop.view.component.OptionsView;
     import org.osflash.signals.ISignal;
@@ -53,7 +53,7 @@ package org.asforge.apidocs.desktop.app {
             injector.mapSingletonOf(IApiDocService, ApiDocServiceImpl);
             injector.mapSingletonOf(IApiDocParser, As3DocParser);
 
-            injector.mapSingleton(ApiDocSelectedSignal);
+            injector.mapSingleton(DocSelectedSignal);
 
 
             var successSignal:ISignal = new Signal(ListCollectionView);
@@ -73,8 +73,8 @@ package org.asforge.apidocs.desktop.app {
             injector.mapSingleton(ApiDocItemModel);
             injector.mapSingleton(OptionsModel);
 
-            mediatorMap.mapView(DropDownListApiDocSelectionView, ApiDocSelectionViewMediator, IApiDocSelectionView);
-            mediatorMap.mapView(ApiDocItemListView, ApiDocItemListViewMediator, IApiDocItemListView);
+            mediatorMap.mapView(DropDownListApiDocSelectionView, DocSelectionViewMediator, IDocSelectionView);
+            mediatorMap.mapView(ItemListView, ItemListViewMediator, IItemListView);
             mediatorMap.mapView(ListFilterView, FilterViewMediator);
             mediatorMap.mapView(OptionsView, OptionsViewMediator, IOptionsView);
 

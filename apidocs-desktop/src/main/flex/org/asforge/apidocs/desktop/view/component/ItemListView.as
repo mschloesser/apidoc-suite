@@ -12,8 +12,8 @@ package org.asforge.apidocs.desktop.view.component {
     import mx.collections.ListCollectionView;
 
     import org.asforge.apidocs.core.model.ApiDocItem;
-    import org.asforge.apidocs.desktop.view.IApiDocItemListView;
-    import org.asforge.apidocs.desktop.view.component.skin.ApiDocItemListSkin;
+    import org.asforge.apidocs.desktop.view.IItemListView;
+    import org.asforge.apidocs.desktop.view.component.skin.ItemListSkin;
     import org.osflash.signals.ISignal;
     import org.osflash.signals.Signal;
 
@@ -24,7 +24,7 @@ package org.asforge.apidocs.desktop.view.component {
     [SkinState("disabled")]
     [SkinState("loading")]
 
-    public class ApiDocItemListView extends SkinnableContainer implements IApiDocItemListView {
+    public class ItemListView extends SkinnableContainer implements IItemListView {
 
         [SkinPart(required=true)]
         public var list:List;
@@ -34,9 +34,9 @@ package org.asforge.apidocs.desktop.view.component {
         private var _itemSelected:ISignal;
         private var _state:String = "normal";
 
-        public function ApiDocItemListView() {
+        public function ItemListView() {
             super();
-            setStyle("skinClass", ApiDocItemListSkin);
+            setStyle("skinClass", ItemListSkin);
         }
 
         override protected function partAdded(partName:String, instance:Object):void {

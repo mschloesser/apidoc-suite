@@ -20,7 +20,7 @@
             <s:VGroup top="10" left="10" right="10" bottom="10">
                 <compontent:DropDownListApiDocSelectionView width="100%" />
                 <compontent:ListFilterView width="100%"/>
-                <compontent:ApiDocItemListView width="100%" height="100%" />
+                <compontent:ItemListView width="100%" height="100%" />
             </s:VGroup>
         </s:NavigatorContent>
         <s:NavigatorContent label="Options" width="100%" height="100%">

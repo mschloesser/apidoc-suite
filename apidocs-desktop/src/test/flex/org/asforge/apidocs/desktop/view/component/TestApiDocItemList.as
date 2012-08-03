@@ -21,11 +21,11 @@ package org.asforge.apidocs.desktop.view.component{
 
     public class TestApiDocItemList {
 
-        private var _apiDocItemListView:ApiDocItemListView;
+        private var _apiDocItemListView:ItemListView;
 
         [Before(ui,async)]
         public function setUp():void {
-            _apiDocItemListView = new ApiDocItemListView();
+            _apiDocItemListView = new ItemListView();
             Async.proceedOnEvent(this, _apiDocItemListView, FlexEvent.CREATION_COMPLETE);
             UIImpersonator.addChild(_apiDocItemListView);
         }
