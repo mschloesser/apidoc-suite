@@ -53,6 +53,11 @@ package org.asforge.apidocs.desktop.view.component {
         }
 
         override protected function getCurrentSkinState():String {
+            if (_state != 'loading' &&
+                (list.dataProvider == null || list.dataProvider.length == 0))
+            {
+                return 'disabled';
+            }
             return _state;
         }
 

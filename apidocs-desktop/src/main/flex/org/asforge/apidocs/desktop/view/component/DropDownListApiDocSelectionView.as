@@ -50,11 +50,11 @@ package org.asforge.apidocs.desktop.view.component {
         }
 
         private function handleIndexChangeEvent(event:IndexChangeEvent):void {
-            _apiDocSelected.dispatch(dropDownList.selectedItem);
+            _apiDocSelected.dispatch(_apiDocList.getItemAt(event.newIndex));
         }
 
         override protected function getCurrentSkinState():String {
-            return currentState;
+            return _apiDocList == null || _apiDocList.length == 0 ? 'disabled' : 'normal';
         }
 
         [Bindable]
