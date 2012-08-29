@@ -10,12 +10,15 @@ package org.asforge.apidocs.desktop.view.component {
     import flash.events.MouseEvent;
 
     import mx.collections.ArrayCollection;
+    import mx.collections.ArrayList;
+    import mx.collections.IList;
     import mx.collections.ListCollectionView;
     import mx.states.State;
     import mx.validators.StringValidator;
     import mx.validators.Validator;
 
     import org.asforge.apidocs.core.model.entity.ApiDoc;
+    import org.asforge.apidocs.core.model.enumeration.ApiDocType;
     import org.asforge.apidocs.desktop.view.IOptionsView;
     import org.asforge.apidocs.desktop.view.component.skin.OptionsViewSkin;
     import org.osflash.signals.ISignal;
@@ -37,6 +40,9 @@ package org.asforge.apidocs.desktop.view.component {
         [SkinPart]
         public var deleteApiDocButton:Button;
 
+        [Bindable]
+        public var docTypeItemEditorDataProvider:IList;
+
         private var _saveApiDocSignal:ISignal = new Signal(ApiDoc);
         private var _deleteButtonSignal:ISignal = new Signal(ApiDoc);
 
@@ -54,6 +60,8 @@ package org.asforge.apidocs.desktop.view.component {
 
             _apiDocList = new ArrayCollection();
             _validators = [];
+
+            docTypeItemEditorDataProvider = new ArrayList(ApiDocType.values());
         }
 
         override protected function partAdded(partName:String, instance:Object):void {

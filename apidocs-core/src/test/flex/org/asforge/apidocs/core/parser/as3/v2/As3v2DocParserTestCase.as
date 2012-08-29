@@ -5,7 +5,7 @@
  * Time: 7:29 PM
  * To change this template use File | Settings | File Templates.
  */
-package org.asforge.apidocs.core.parser{
+package org.asforge.apidocs.core.parser.as3.v2{
 
     import mx.collections.IList;
 
@@ -15,14 +15,14 @@ package org.asforge.apidocs.core.parser{
     import org.hamcrest.object.equalTo;
     import org.hamcrest.object.instanceOf;
 
-    public class As3DocParserTestCase {
+    public class As3v2DocParserTestCase {
 
-        private var parser:As3DocParser;
+        private var parser:As3v2DocParser;
 
         [Before]
         public function setUp():void {
-            parser = new As3DocParser();
-            parser.apiDocItemExtractor = new As3SourceItemExtractor();
+            parser = new As3v2DocParser();
+            parser.apiDocItemExtractor = new As3v2SourceItemExtractor();
         }
         
         [Test]
@@ -32,7 +32,7 @@ package org.asforge.apidocs.core.parser{
 
         [Test]
         public function parserExtractsListOfApiDocItemsFromValidSource():void {
-            var source:String = StaticResources.getAs3DocSource();
+            var source:String = StaticResources.getAs3v2DocSource();
             var result:IList = parser.parseApiDoc(source);
             assertThat(result.length, greaterThan(0));
             assertThat(result.getItemAt(0), instanceOf(ApiDocItem));

@@ -12,12 +12,16 @@ package org.asforge.apidocs.desktop.model {
 
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.core.service.IApiDocService;
+    import org.asforge.apidocs.desktop.signal.ApiDocListUpdatedSignal;
     import org.robotlegs.mvcs.Actor;
 
     public class OptionsModel extends Actor {
 
         [Inject]
         public var apiDocService:IApiDocService;
+
+        [Inject]
+        public var apiDocListUpdatedSignal:ApiDocListUpdatedSignal;
 
         private var list:ListCollectionView;
 
@@ -35,6 +39,7 @@ package org.asforge.apidocs.desktop.model {
             } else {
                 apiDocService.updateApiDoc(apiDoc);
             }
+            apiDocListUpdatedSignal.dispatch();
         }
 
         public function deleteApiDoc(apiDoc:ApiDoc):void {
@@ -42,6 +47,7 @@ package org.asforge.apidocs.desktop.model {
             list.removeItemAt(itemIndex);
             if (apiDoc.id > 0) {
                 apiDocService.deleteApiDoc(apiDoc);
+                apiDocListUpdatedSignal.dispatch();
             }
         }
 

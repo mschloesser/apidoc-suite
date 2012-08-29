@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<s:GridItemEditor xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx">
+
+    <fx:Script><![CDATA[
+        import mx.collections.IList;
+
+        import org.asforge.apidocs.core.model.entity.ApiDoc;
+
+        private var _dataProvider:IList;
+
+        [Bindable("dropDownGridItemEditorDataProviderChanged")]
+        public function get dataProvider():IList {
+            return _dataProvider;
+        }
+
+        public function set dataProvider(value:IList):void {
+            _dataProvider = value;
+            dispatchEvent(new Event("dropDownGridItemEditorDataProviderChanged"));
+        }
+
+        private function labelFunc(docType:ApiDoc):String {
+            return docType + "";
+        }
+        ]]></fx:Script>
+
+    <s:DropDownList id="dropDownList" width="100%"
+                    labelFunction="labelFunc"/>
+
+</s:GridItemEditor>

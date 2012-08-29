@@ -12,6 +12,7 @@ package org.asforge.apidocs.desktop.view {
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.desktop.model.ApiDocItemModel;
     import org.asforge.apidocs.desktop.model.ApiDocModel;
+    import org.asforge.apidocs.desktop.signal.ApiDocListUpdatedSignal;
     import org.asforge.apidocs.desktop.signal.DocSelectedSignal;
     import org.robotlegs.mvcs.Mediator;
 
@@ -27,14 +28,23 @@ package org.asforge.apidocs.desktop.view {
         public var apiDocSelectedSignal:DocSelectedSignal;
 
         [Inject]
+        public var apiDocListUpdatedSignal:ApiDocListUpdatedSignal;
+
+        [Inject]
         public var itemModel:ApiDocItemModel;
 
         override public function onRegister():void {
             view.apiDocList = model.findAll();
             view.apiDocSelected.add(onApiDocSelected);
 
+            apiDocListUpdatedSignal.add(onApiDocListUpdated);
+
             itemModel.itemService.itemsFound.add(onItemsFound);
             itemModel.itemService.errorOccurred.add(onItemsFound);
+        }
+
+        private function onApiDocListUpdated():void {
+            view.apiDocList = model.findAll();
         }
 
         private function onItemsFound(list:ListCollectionView = null):void {

@@ -5,16 +5,17 @@
  * Time: 7:32 PM
  * To change this template use File | Settings | File Templates.
  */
-package org.asforge.apidocs.core.parser {
+package org.asforge.apidocs.core.parser.as3.v2 {
 
     import mx.collections.ArrayList;
     import mx.collections.IList;
 
     import org.asforge.apidocs.core.model.ApiDocItem;
+    import org.asforge.apidocs.core.parser.*;
 
-    public class As3DocParser implements IApiDocParser {
+    public class As3v2DocParser implements IApiDocParser {
 
-        public var apiDocItemExtractor:As3SourceItemExtractor;
+        public var apiDocItemExtractor:As3v2SourceItemExtractor;
 
         public function parseApiDoc(source:String):IList {
 

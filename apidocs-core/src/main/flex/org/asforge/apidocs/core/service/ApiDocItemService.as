@@ -19,10 +19,8 @@ package org.asforge.apidocs.core.service {
 
     import org.asforge.apidocs.core.model.entity.ApiDoc;
     import org.asforge.apidocs.core.model.enumeration.ApiDocType;
-    import org.asforge.apidocs.core.parser.As3DocParser;
-    import org.asforge.apidocs.core.parser.As3SourceItemExtractor;
+    import org.asforge.apidocs.core.parser.DocParserProvider;
     import org.asforge.apidocs.core.parser.IApiDocParser;
-    import org.asforge.apidocs.core.parser.JavaDocParser;
     import org.asforge.apidocs.core.util.ItemCache;
     import org.osflash.signals.ISignal;
 
@@ -36,21 +34,20 @@ package org.asforge.apidocs.core.service {
         private var _errorOccurred:ISignal;
 
         private var _cacheKey:int;
-        
+
+        private static const _docParserProvider:DocParserProvider = new DocParserProvider();
+
         public function ApiDocItemService(itemsFound:ISignal, errorOccured:ISignal) {
             _itemsFound = itemsFound;
             _errorOccurred = errorOccured;
         }
 
+
         public function queryItems(apiDoc:ApiDoc):void {
             _cacheKey = apiDoc.id;
 
-            if (apiDoc.type == ApiDocType.AS3.ordinal) {
-                parser = new As3DocParser();
-                As3DocParser(parser).apiDocItemExtractor = new As3SourceItemExtractor();
-            } else if (apiDoc.type == ApiDocType.JAVA.ordinal) {
-                parser = new JavaDocParser();
-            }
+            var type:ApiDocType = ApiDocType.byOrdinal(apiDoc.type);
+            parser = _docParserProvider.getParserByType(type);
 
             if (itemCache.contains(_cacheKey)) {
                 _itemsFound.dispatch(itemCache.retrieve(_cacheKey));

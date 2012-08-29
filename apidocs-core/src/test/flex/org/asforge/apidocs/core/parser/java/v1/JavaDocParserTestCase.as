@@ -5,7 +5,7 @@
  * Time: 6:11 PM
  * To change this template use File | Settings | File Templates.
  */
-package org.asforge.apidocs.core.parser {
+package org.asforge.apidocs.core.parser.java.v1 {
 
     import mx.collections.IList;
 
@@ -21,7 +21,7 @@ package org.asforge.apidocs.core.parser {
 
         [Before]
         public function setUp():void {
-            source = StaticResources.getJavaDocSource();
+            source = StaticResources.getJavaDocV1Source();
             parser = new JavaDocParser();
         }
 
@@ -32,7 +32,6 @@ package org.asforge.apidocs.core.parser {
             assertThat(result.getItemAt(0).name, equalTo("After"));
             assertThat(result.getItemAt(0).packageName, equalTo("org.junit"));
             assertThat(result.getItemAt(0).type, equalTo(ApiDocItemType.ANNOTATION));
-
         }
 
         [Test]

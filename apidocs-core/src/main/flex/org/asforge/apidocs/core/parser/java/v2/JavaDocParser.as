@@ -5,13 +5,14 @@
  * Time: 6:12 PM
  * To change this template use File | Settings | File Templates.
  */
-package org.asforge.apidocs.core.parser {
+package org.asforge.apidocs.core.parser.java.v2 {
 
     import mx.collections.ArrayList;
     import mx.collections.IList;
 
     import org.asforge.apidocs.core.model.ApiDocItem;
     import org.asforge.apidocs.core.model.enumeration.ApiDocItemType;
+    import org.asforge.apidocs.core.parser.*;
 
     public class JavaDocParser implements IApiDocParser {
 
@@ -21,15 +22,15 @@ package org.asforge.apidocs.core.parser {
         public function parseApiDoc(source:String):IList
         {
             var items:Array = [];
-            var startTag:String = source.substr(source.toLowerCase().indexOf("<a"));
-            var allTags:Array = startTag.split(/<br>/i);
-            for each (var tag:String in allTags) {
+            var detectedItems:Vector.<String> = detectItems(source);
+            for each (var tag:String in detectedItems)
+            {
                 var titleAttrib:String = "title=\"";
                 var titleAttribPos:int = tag.toLowerCase().indexOf(titleAttrib);
                 if (titleAttribPos == -1) {
                     continue;
                 }
-                
+
                 var title:String = tag.toLowerCase().substring(titleAttribPos + titleAttrib.length);
                 title = title.substring(0, title.indexOf("\""));
                 var titleSplit:Array = title.split(" ");
@@ -58,6 +59,26 @@ package org.asforge.apidocs.core.parser {
             }
 
             return aValue;
+        }
+
+        internal function detectItems(source:String):Vector.<String> {
+            var pos:Vector.<int> = new <int>[];
+            pos[0] = source.indexOf('<ul>');
+
+            var result:Vector.<String> = new <String>[];
+            
+            var body:String = source.substring(pos[0]);
+            var lines:Array = body.split('\n');
+            for each (var line:String in lines) {
+                pos[1] = line.indexOf('<li>');
+                if (pos[1] != -1)
+                {
+                    pos[2] = line.indexOf('</a>');
+                    result.push(line.substring(pos[1] + 4, pos[2] + 4));
+                }
+            }
+
+            return result;
         }
     }
 }

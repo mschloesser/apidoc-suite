@@ -15,9 +15,7 @@ package org.asforge.apidocs.desktop.app {
 
     import org.asforge.apidocs.core.dao.IApiDocDao;
     import org.asforge.apidocs.core.dao.impl.SqlLiteApiDaoImpl;
-    import org.asforge.apidocs.core.parser.As3DocParser;
-    import org.asforge.apidocs.core.parser.As3SourceItemExtractor;
-    import org.asforge.apidocs.core.parser.IApiDocParser;
+    import org.asforge.apidocs.core.parser.DocParserProvider;
     import org.asforge.apidocs.core.service.ApiDocItemService;
     import org.asforge.apidocs.core.service.ApiDocServiceImpl;
     import org.asforge.apidocs.core.service.IApiDocItemService;
@@ -26,6 +24,7 @@ package org.asforge.apidocs.desktop.app {
     import org.asforge.apidocs.desktop.model.ApiDocItemModel;
     import org.asforge.apidocs.desktop.model.ApiDocModel;
     import org.asforge.apidocs.desktop.model.OptionsModel;
+    import org.asforge.apidocs.desktop.signal.ApiDocListUpdatedSignal;
     import org.asforge.apidocs.desktop.signal.DocSelectedSignal;
     import org.asforge.apidocs.desktop.view.DocSelectionViewMediator;
     import org.asforge.apidocs.desktop.view.FilterViewMediator;
@@ -48,13 +47,16 @@ package org.asforge.apidocs.desktop.app {
             
             var dbFile:File = File.applicationStorageDirectory.resolvePath("foo.sqlite");
             injector.mapValue(File, dbFile);
+
             injector.mapSingletonOf(IApiDocDao, SqlLiteApiDaoImpl);
-//            injector.mapSingletonOf(IApiDocDao, InMemoryApiDaoImpl);
             injector.mapSingletonOf(IApiDocService, ApiDocServiceImpl);
-            injector.mapSingletonOf(IApiDocParser, As3DocParser);
-
+            
+            // signals
             injector.mapSingleton(DocSelectedSignal);
+            injector.mapSingleton(ApiDocListUpdatedSignal);
 
+            // parser
+            injector.mapSingleton(DocParserProvider);
 
             var successSignal:ISignal = new Signal(ListCollectionView);
             var errorSignal:ISignal = new Signal();
@@ -64,9 +66,6 @@ package org.asforge.apidocs.desktop.app {
             itemService.itemCache.storage = new Dictionary();
             itemService.loader = new URLLoader();
 
-            var as3DocParser:As3DocParser = new As3DocParser();
-            as3DocParser.apiDocItemExtractor = new As3SourceItemExtractor();
-            itemService.parser = as3DocParser;
             injector.mapValue(IApiDocItemService, itemService);
 
             injector.mapSingleton(ApiDocModel);

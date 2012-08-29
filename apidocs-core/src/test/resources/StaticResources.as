@@ -11,25 +11,32 @@ package {
 
     public class StaticResources {
 
-        [Embed(source="/as3-doc.html", mimeType="application/octet-stream")]
-        private static const staticAs3DocSource:Class;
+        [Embed(source="/as3v2-test.html", mimeType="application/octet-stream")]
+        private static const staticAs3v2DocSource:Class;
 
-        [Embed(source="/apidocs.xml", mimeType="application/octet-stream")]
-        private static const staticApiDocsSource:Class;
+        [Embed(source="/as3doc-test.html", mimeType="application/octet-stream")]
+        private static const staticAs3DocSource:Class;
 
         [Embed(source="/javadoc-test.html", mimeType="application/octet-stream")]
         private static const staticJavadocSource:Class;
+
+        [Embed(source="/javadoc-v2.html", mimeType="application/octet-stream")]
+        private static const staticJavadocV2Source:Class;
+
+        public static function getAs3v2DocSource():String {
+            return getStringFromByteArray(staticAs3v2DocSource);
+        }
 
         public static function getAs3DocSource():String {
             return getStringFromByteArray(staticAs3DocSource);
         }
 
-        public static function getApiDocsSource():String {
-            return getStringFromByteArray(staticApiDocsSource);
+        public static function getJavaDocV1Source():String {
+            return getStringFromByteArray(staticJavadocSource);
         }
 
-        public static function getJavaDocSource():String {
-            return getStringFromByteArray(staticJavadocSource);
+        public static function getJavaDocV2Source():String {
+            return getStringFromByteArray(staticJavadocV2Source);
         }
 
         private static function getStringFromByteArray(classRef:Class):String {

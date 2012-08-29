@@ -5,7 +5,7 @@
  * Time: 7:31 AM
  * To change this template use File | Settings | File Templates.
  */
-package org.asforge.apidocs.core.parser {
+package org.asforge.apidocs.core.parser.as3.v2 {
 
     import org.asforge.apidocs.core.exception.ItemExtractorException;
     import org.asforge.apidocs.core.model.ApiDocItem;
@@ -14,13 +14,13 @@ package org.asforge.apidocs.core.parser {
     import org.hamcrest.assertThat;
     import org.hamcrest.object.equalTo;
 
-    public class As3SourceExtractorTestCase {
+    public class As3v2SourceExtractorTestCase {
 
-        private var extractor:As3SourceItemExtractor;
+        private var extractor:As3v2SourceItemExtractor;
 
         [Before]
         public function setUp():void {
-            extractor = new As3SourceItemExtractor();
+            extractor = new As3v2SourceItemExtractor();
         }
 
         [After]

@@ -5,14 +5,14 @@
  * Time: 7:29 AM
  * To change this template use File | Settings | File Templates.
  */
-package org.asforge.apidocs.core.parser {
+package org.asforge.apidocs.core.parser.as3.v2 {
 
     import org.asforge.apidocs.core.exception.ItemExtractorException;
     import org.asforge.apidocs.core.model.ApiDocItem;
     import org.asforge.apidocs.core.model.enumeration.ApiDocItemType;
 
-    public class As3SourceItemExtractor {
-        public function As3SourceItemExtractor() {
+    public class As3v2SourceItemExtractor {
+        public function As3v2SourceItemExtractor() {
         }
 
         public function extractItem(definition:String):ApiDocItem {
